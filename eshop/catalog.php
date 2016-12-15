@@ -2,10 +2,6 @@
 // подключение библиотек
 require "inc/lib.inc.php";
 require "inc/config.inc.php";
-
-
-
-// basketInit();
 ?>
 <!DOCTYPE html>
 <html>

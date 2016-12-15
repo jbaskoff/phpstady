@@ -1,7 +1,7 @@
 <?php
 	// подключение библиотек
-	require "inc/lib.inc.php";
-	require "inc/config.inc.php";
+require "inc/lib.inc.php";
+require "inc/config.inc.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,30 +11,50 @@
 </head>
 <body>
 	<h1>Ваша корзина</h1>
-<?php
+	<?php
+	if (!$count) {
+		echo "<p>Корзина пуста! Вернитесь в <a href='catalog.php'>каталог</a></p>";
+		exit;
+	} else {
+		echo "<p>Вернуться в <a href='catalog.php'>каталог</a></p>";
+	}
+	?>
+	<table border="1" cellpadding="5" cellspacing="0" width="100%">
+		<tr>
+			<th>N п/п</th>
+			<th>Название</th>
+			<th>Автор</th>
+			<th>Год издания</th>
+			<th>Цена, руб.</th>
+			<th>Количество</th>
+			<th>Удалить</th>
+		</tr>
+		<?php
+		$i = 1; $summ = 0;
+		$goods = myBasket();
+		foreach($goods as $item){
+			?>
+			<tr>
+				<td><?= $i++?></td>
+				<td><?= $item['title']?></td>
+				<td><?= $item['author']?></td>
+				<td><?= $item['pubyear']?></td>
+				<td><?= $item['price']?></td>
+				<td><?= $item['quantity']?></td> 
+				<td><a href="delete_from_basket.php?id=<?= $item['id']?>">Удалить</a></td>
+			</tr>
+			<?
+			$summ += $item['price'] * $item['quantity'];
+		}
+		?>
+	</table>
 
-?>
-<table border="1" cellpadding="5" cellspacing="0" width="100%">
-<tr>
-	<th>N п/п</th>
-	<th>Название</th>
-	<th>Автор</th>
-	<th>Год издания</th>
-	<th>Цена, руб.</th>
-	<th>Количество</th>
-	<th>Удалить</th>
-</tr>
-<?php
-	
-?>
-</table>
+	<p>Всего товаров в корзине на сумму: <?=$summ?> руб.</p>
 
-<p>Всего товаров в корзине на сумму: руб.</p>
-
-<div align="center">
-	<input type="button" value="Оформить заказ!"
-                      onClick="location.href='orderform.php'" />
-</div>
+	<div align="center">
+		<input type="button" value="Оформить заказ!"
+		onClick="location.href='orderform.php'" />
+	</div>
 
 </body>
 </html>
