@@ -12,14 +12,19 @@
 <body>
 <h1>Поступившие заказы:</h1>
 <?php
-
+	$orders = getOrders();
+	if (!$orders) {
+		echo "Заказов нет";
+		exit;
+	}
+	foreach ($orders as $order) {
 ?>
 <hr>
-<h2>Заказ номер: </h2>
-<p><b>Заказчик</b>: </p>
-<p><b>Email</b>: </p>
-<p><b>Телефон</b>: </p>
-<p><b>Адрес доставки</b>: </p>
+<h2>Заказ номер: <?=order['orderid']?></h2>
+<p><b>Заказчик</b>: <?=order['name']?></p>
+<p><b>Email</b>: <?=order['email']?></p>
+<p><b>Телефон</b>: <?=order['phone']?></p>
+<p><b>Адрес доставки</b>: <?=order['address']?></p>
 <p><b>Дата размещения заказа</b>: </p>
 
 <h3>Купленные товары:</h3>
@@ -36,6 +41,8 @@
 
 </table>
 <p>Всего товаров в заказе на сумму: руб.</p>
-
+<?
+} //end big foreach
+?>
 </body>
 </html>
