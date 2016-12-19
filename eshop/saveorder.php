@@ -7,7 +7,7 @@
 	$a = $_POST['address'];
 	$dt = time();
 	$oid = $basket['orderid'];
-	$order = "$n|$e|$p|$a|$oid|\n";
+	$order = "$n|$e|$p|$a|$oid|$dt\n";
 	file_put_contents("admin/".ORDERS_LOG, $order, FILE_APPEND);
 	saveOrder($dt);
 ?>
